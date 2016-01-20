@@ -24,6 +24,15 @@
       }, this);
     },
 
+    getColumn: function(colIndex){
+      var column = [];
+      var rows = this.rows();
+      _.each(rows, function(row, index){
+        column.push(row[colIndex]);
+      });
+      return column;
+    },
+
     togglePiece: function(rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
       this.trigger('change');
