@@ -15,7 +15,7 @@
 
 window.findSolution = function(row, n, validator, board, callback) {
   if(row === n){
-    return callback()
+    return callback();
   }
   for (var i = 0; i < n; i++) {
     board.togglePiece(row, i);
@@ -70,10 +70,17 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var solution = undefined; //fixme
+  var board = new Board({n:n});
+  
+  var solution = findSolution(0, n, "hasAnyQueensConflicts", board, function(){
+    return _.map(board.rows(), function(row){
+      return row.slice();
+    });
+  }) || board.rows();
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
+
 };
 
 
